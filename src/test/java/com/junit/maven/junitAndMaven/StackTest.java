@@ -2,6 +2,7 @@ package com.junit.maven.junitAndMaven;
 
 import businessObject.Stack;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import java.util.EmptyStackException;
 
@@ -12,6 +13,7 @@ import static org.junit.Assert.*;
  */
 public class StackTest {
 
+    @Category({SmokeTestsSuite.class, StackTestsSuite.class})
     @Test
     public void pushTest() {
         Stack stack = new Stack();
@@ -19,12 +21,14 @@ public class StackTest {
         assertEquals("Expected value is not equal to actual", 3, stack.peek().intValue());
     }
 
+    @Category({StackTestsSuite.class, ExceptionTestSuite.class})
     @Test(expected = IndexOutOfBoundsException.class)
     public void pushExceptionTest() {
         Stack stack = new Stack(0);
         stack.push(1);
     }
 
+    @Category({SmokeTestsSuite.class, StackTestsSuite.class})
     @Test
     public void peekTest() {
         Stack stack = new Stack();
@@ -33,13 +37,14 @@ public class StackTest {
         assertEquals("Expected value is not equal to actual", 22, stack.peek().intValue());
     }
 
-
+    @Category({StackTestsSuite.class, ExceptionTestSuite.class})
     @Test(expected = EmptyStackException.class)
     public void peekExceptionTest() {
         Stack stack = new Stack();
         stack.peek();
     }
 
+    @Category({SmokeTestsSuite.class, StackTestsSuite.class})
     @Test
     public void popTest() {
         Stack stack = new Stack();
@@ -49,18 +54,21 @@ public class StackTest {
         assertEquals("Expected value is not equal to actual", 11, stack.peek().intValue());
     }
 
+    @Category({StackTestsSuite.class})
     @Test
     public void popNullTest() {
         Stack stack = new Stack();
         assertNull("Stack should be empty, but it wasn't", stack.pop());
     }
 
+    @Category({SmokeTestsSuite.class, StackTestsSuite.class})
     @Test
     public void emptyTrueTest() {
         Stack stack = new Stack();
         assertTrue("Actual value isn't true", stack.empty());
     }
 
+    @Category({SmokeTestsSuite.class, StackTestsSuite.class})
     @Test
     public void emptyFalseTest() {
         Stack stack = new Stack();
