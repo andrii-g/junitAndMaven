@@ -4,6 +4,7 @@ import businessObject.Stack;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
+import java.io.IOException;
 import java.util.EmptyStackException;
 
 import static org.junit.Assert.*;
@@ -12,6 +13,22 @@ import static org.junit.Assert.*;
  * Created by User on 16.10.2016.
  */
 public class StackTest {
+
+    @Category({SmokeTestsSuite.class, StackTestsSuite.class})
+    @Test
+    public void del() {
+
+        ResourcesReader resourcesReader = new ResourcesReader();
+        try{
+            resourcesReader.getResources();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+
+        Stack stack = new Stack();
+        stack.push(3);
+        assertEquals("Expected value is not equal to actual", 3, stack.peek().intValue());
+    }
 
     @Category({SmokeTestsSuite.class, StackTestsSuite.class})
     @Test
