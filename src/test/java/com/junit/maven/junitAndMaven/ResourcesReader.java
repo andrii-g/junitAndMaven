@@ -12,30 +12,24 @@ public class ResourcesReader {
     String result = "";
     InputStream inputStream;
 
-    public String getResources() throws IOException{
+    public String getStackArgument(String arg) throws IOException{
+        String argument = "";
         try{
             Properties properties = new Properties();
-            String fileLocation = "data.properties";
-
+            String fileLocation = "stack.properties";
             inputStream = getClass().getClassLoader().getResourceAsStream(fileLocation);
-
             if (inputStream != null){
                 properties.load(inputStream);
             }else {
                 throw new FileNotFoundException(fileLocation + " not found");
             }
-
-            String arg1 = properties.getProperty("arg1");
-            String arg2 = properties.getProperty("arg2");
-
-            result = arg1 + " " + arg2;
-            System.out.println(result);
+            argument = properties.getProperty(arg);
         }catch (Exception e){
             e.printStackTrace();
         }finally {
             inputStream.close();
         }
-        return result;
+        return argument;
     }
 
 }
