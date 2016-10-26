@@ -32,4 +32,24 @@ public class ResourcesReader {
         return argument;
     }
 
+    public String getCalculatorArgument(String arg) throws IOException{
+        String argument = "";
+        try{
+            Properties properties = new Properties();
+            String fileLocation = "calculator.properties";
+            inputStream = getClass().getClassLoader().getResourceAsStream(fileLocation);
+            if (inputStream != null){
+                properties.load(inputStream);
+            }else {
+                throw new FileNotFoundException(fileLocation + " not found");
+            }
+            argument = properties.getProperty(arg);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            inputStream.close();
+        }
+        return argument;
+    }
+
 }
